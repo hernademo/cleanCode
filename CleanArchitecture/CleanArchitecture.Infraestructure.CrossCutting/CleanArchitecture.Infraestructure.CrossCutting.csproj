@@ -36,6 +36,9 @@
     <Reference Include="Castle.Windsor, Version=4.0.0.0, Culture=neutral, PublicKeyToken=407dd0808d44fbdc, processorArchitecture=MSIL">
       <HintPath>..\packages\Castle.Windsor.4.1.0\lib\net45\Castle.Windsor.dll</HintPath>
     </Reference>
+    <Reference Include="FluentValidation, Version=7.0.0.0, Culture=neutral, PublicKeyToken=7de548da2fbae0f0, processorArchitecture=MSIL">
+      <HintPath>..\packages\FluentValidation.7.3.4\lib\net45\FluentValidation.dll</HintPath>
+    </Reference>
     <Reference Include="Newtonsoft.Json, Version=6.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
       <HintPath>..\packages\Newtonsoft.Json.6.0.4\lib\net45\Newtonsoft.Json.dll</HintPath>
       <Private>True</Private>
@@ -63,6 +66,7 @@
     <Compile Include="IoC\Installers\RepositoriesInstaller.cs" />
     <Compile Include="IoC\Installers\RestServerControllerInstaller.cs" />
     <Compile Include="IoC\Installers\ServiceInstaller.cs" />
+    <Compile Include="IoC\Installers\ValidatorInstaller.cs" />
     <Compile Include="IoC\Installers\WebApiControllerInstaller.cs" />
     <Compile Include="IoC\IoCHelper.cs" />
     <Compile Include="IoC\WindsorDependencyResolver.cs" />

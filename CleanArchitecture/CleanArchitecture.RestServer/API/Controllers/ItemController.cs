@@ -1,6 +1,7 @@
 ﻿using CleanArchitecture.Core.Dto;
 using CleanArchitecture.Core.Entities;
 using CleanArchitecture.Core.Interfaces;
+using FluentValidation;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,12 +13,13 @@ namespace CleanArchitecture.RestServer.API.Controllers
 {
     public class ItemController : ApiController
     {
-
+        private readonly IValidator<ItemDTO> validator;
         private readonly IItemService service;
 
-        public ItemController(IItemService service)
+        public ItemController(IItemService service, IValidator<ItemDTO> validator)
         {
             this.service = service;
+            this.validator = validator;
         }
 
         [HttpGet]
@@ -31,15 +33,23 @@ namespace CleanArchitecture.RestServer.API.Controllers
             return this.service.GetById(id);
         }
 
-        public void Post([FromBody]ItemDTO risk)
+        public void Post([FromBody]ItemDTO item)
         {
-            var riskModel = new ItemDoc
+            if (this.IsValid(item))
             {
-                Value = risk.Value,
-                Created = DateTime.Now
-            };
+                var riskModel = new ItemDoc
+                {
+                    Value = item.Value,
+                    Created = DateTime.Now
+                };
 
-            this.service.Add(riskModel);
+                this.service.Add(riskModel);
+            }
+        }
+
+        private bool IsValid(ItemDTO item)
+        {
+            return this.validator.Validate(item).IsValid;
         }
     }
 }
